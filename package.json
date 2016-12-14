@@ -1,6 +1,6 @@
 {
   "name": "can-types",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A stateful container for CanJS type information",
   "homepage": "http://canjs.com",
   "repository": {
