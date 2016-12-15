@@ -37,8 +37,7 @@
   },
   "dependencies": {
     "can-namespace": "1.0.0",
-    "can-util": "^3.0.13",
-    "jquery": "~2.2.1"
+    "can-util": "^3.0.13"
   },
   "devDependencies": {
     "documentjs": "^0.4.2",
