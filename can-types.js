@@ -1,5 +1,4 @@
 var namespace = require('can-namespace');
-var isPromise = require('can-util/js/is-promise/is-promise');
 /**
  * @module {Object} can-types
  * @parent can-infrastructure
@@ -58,7 +57,7 @@ var types = {
 	 * @return {Boolean} `true` if the object is a Promise.
 	 */
 	isPromise: function(obj){
-		return isPromise(obj);
+		return (obj instanceof Promise || (Object.prototype.toString.call(obj) === '[object Promise]'));
 	},
 	/**
 	 * @function can-types.isConstructor isConstructor

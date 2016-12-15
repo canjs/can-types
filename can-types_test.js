@@ -53,3 +53,9 @@ QUnit.test('should throw if can-namespace.types is already defined', function() 
 		start();
 	});
 });
+
+QUnit.test("isPromise", function() {
+	QUnit.ok(!types.isPromise({}), "Object is not a promise");
+	QUnit.ok(!types.isPromise({ catch: function(){}, then: function(){} }), "function with then and catch is not a Promise");
+	QUnit.ok(types.isPromise( new Promise(function(){})), "a new Promise() is a Promise");
+});
