@@ -40,7 +40,10 @@ QUnit.test('should throw if can-namespace.types is already defined', function() 
 	stop();
 	clone({
 		'can-namespace': {
-			types: {}
+			default: {
+				types: {}
+			},
+			__useDefault: true
 		}
 	})
 	.import('./can-types')
