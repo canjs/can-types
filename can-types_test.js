@@ -52,7 +52,7 @@ QUnit.test('should throw if can-namespace.types is already defined', function() 
 		start();
 	})
 	.catch(function(err) {
-		ok(err && err.indexOf('can-types') >= 0, 'should throw an error about can-types');
+		ok(err && err.message.indexOf('can-types') >= 0, 'should throw an error about can-types');
 		start();
 	});
 });
