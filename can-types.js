@@ -111,13 +111,19 @@ var types = {
 		//!steal-remove-end
 		return obj && obj.isComputed;
 	},
+
 	/**
 	 * @property {Symbol} can-types.iterator iterator
 	 * @option {Symbol}
 	 *
 	 * Used to implement an iterable object that can be used with [can-util/js/each/each]. In browsers that support for/of this will be Symbol.iterator; in older browsers it will be a string, but is still useful with [can-util/js/each/each].
 	 */
-	iterator: (typeof Symbol === "function" && Symbol.iterator) || "@@iterator",
+	get iterator() {
+		//!steal-remove-start
+		dev.warn('can-types.iterator is deprecated, use canSymbol.for("iterator") instead.');
+		//!steal-remove-end
+		return canSymbol.for("iterator");
+	},
 	/**
 	 * @property {Map} can-types.DefaultMap DefaultMap
 	 *
