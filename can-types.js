@@ -1,4 +1,8 @@
 var namespace = require('can-namespace');
+var canReflect = require('can-reflect');
+var canSymbol = require('can-symbol');
+var dev = require('can-util/js/dev/dev');
+
 /**
  * @module {Object} can-types
  * @parent can-infrastructure
@@ -36,8 +40,11 @@ var types = {
 	 *
 	 * @return {Boolean} `true` if the object is map like.
 	 */
-	isMapLike: function(){
-		return false;
+	isMapLike: function(obj){
+		//!steal-remove-start
+		dev.warn('can-types.isMapLike(obj) is deprecated, please use `canReflect.isObservableLike(obj) && canReflect.isMapLike(obj)` instead.');
+		//!steal-remove-end
+		return canReflect.isObservableLike(obj) && canReflect.isMapLike(obj);
 	},
 	/**
 	 * @function can-types.isListLike isListLike
@@ -46,8 +53,11 @@ var types = {
 	 *
 	 * @return {Boolean} `true` if the object is list like.
 	 */
-	isListLike: function(){
-		return false;
+	isListLike: function(obj){
+		//!steal-remove-start
+		dev.warn('can-types.isListLike(obj) is deprecated, please use `canReflect.isObservableLike(obj) && canReflect.isListLike(obj)` instead.');
+		//!steal-remove-end
+		return canReflect.isObservableLike(obj) && canReflect.isListLike(obj);
 	},
 	/**
 	 * @function can-types.isPromise isPromise
@@ -67,16 +77,10 @@ var types = {
 	 * @return {Boolean} `true` if the object is a constructor function.
 	 */
 	isConstructor: function(func){
-		/* jshint unused: false */
-		if(typeof func !== "function") {
-			return false;
-		}
-		// if there are any properties on the prototype, assume it's a constructor
-		for(var prop  in func.prototype) {
-			return true;
-		}
-		// We could also check if something is returned, if it is, probably not a constructor.
-		return false;
+		//!steal-remove-start
+		dev.warn('can-types.isConstructor is deprecated, please use canReflect.isConstructorLike instead.');
+		//!steal-remove-end
+		return canReflect.isConstructorLike(func);
 	},
 	/**
 	 * @function can-types.isCallableForValue isCallableForValue
@@ -86,7 +90,10 @@ var types = {
 	 * @return {Boolean} `true` if the object should be called for a value.
 	 */
 	isCallableForValue: function(obj){
-		return typeof obj === "function" && !types.isConstructor(obj);
+		//!steal-remove-start
+		dev.warn('can-types.isCallableForValue is deprecated, please check for the existence of canSymbol.for("getValue") instead.');
+		//!steal-remove-end
+		return obj && obj[canSymbol.for("getValue")];
 	},
 	/**
 	 * @function can-types.isCompute isCompute
@@ -96,6 +103,9 @@ var types = {
 	 * @return {Boolean} `true` if the object is a [can-compute].
 	 */
 	isCompute: function(obj){
+		//!steal-remove-start
+		dev.warn('can-types.isCompute is deprecated.');
+		//!steal-remove-end
 		return obj && obj.isComputed;
 	},
 	/**
