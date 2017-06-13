@@ -67,7 +67,10 @@ var types = {
 	 * @return {Boolean} `true` if the object is a Promise.
 	 */
 	isPromise: function(obj){
-		return (obj instanceof Promise || (Object.prototype.toString.call(obj) === '[object Promise]'));
+		//!steal-remove-start
+		dev.warn('can-types.isPromise is deprecated, please use canReflect.isPromise instead.');
+		//!steal-remove-end
+		return canReflect.isPromise(obj);
 	},
 	/**
 	 * @function can-types.isConstructor isConstructor
