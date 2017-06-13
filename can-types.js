@@ -1,5 +1,6 @@
 var namespace = require('can-namespace');
 var canReflect = require('can-reflect');
+var canSymbol = require('can-symbol');
 var dev = require('can-util/js/dev/dev');
 
 /**
@@ -89,7 +90,10 @@ var types = {
 	 * @return {Boolean} `true` if the object should be called for a value.
 	 */
 	isCallableForValue: function(obj){
-		return typeof obj === "function" && !types.isConstructor(obj);
+		//!steal-remove-start
+		dev.warn('can-types.isCallableForValue is deprecated, please check for the existence of canSymbol.for("getValue") instead.');
+		//!steal-remove-end
+		return obj && obj[canSymbol.for("getValue")];
 	},
 	/**
 	 * @function can-types.isCompute isCompute
@@ -99,6 +103,9 @@ var types = {
 	 * @return {Boolean} `true` if the object is a [can-compute].
 	 */
 	isCompute: function(obj){
+		//!steal-remove-start
+		dev.warn('can-types.isCompute is deprecated.');
+		//!steal-remove-end
 		return obj && obj.isComputed;
 	},
 	/**
