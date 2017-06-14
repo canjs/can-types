@@ -67,9 +67,9 @@ var types = {
 
 	get iterator() {
 		//!steal-remove-start
-		dev.warn('can-types.iterator is deprecated, use canSymbol.for("iterator") instead.');
+		dev.warn('can-types.iterator is deprecated, use `canSymbol.iterator || canSymbol.for("iterator")` instead.');
 		//!steal-remove-end
-		return canSymbol.for("iterator");
+		return canSymbol.iterator || canSymbol.for("iterator");
 	},
 	/**
 	 * @property {Map} can-types.DefaultMap DefaultMap
