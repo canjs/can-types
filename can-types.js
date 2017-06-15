@@ -53,9 +53,9 @@ var types = {
 
 	isCallableForValue: function(obj){
 		//!steal-remove-start
-		dev.warn('can-types.isCallableForValue is deprecated, please check for the existence of canSymbol.for("getValue") instead.');
+		dev.warn('can-types.isCallableForValue(obj) is deprecated, please use `canReflect.isFunctionLike(obj) && !canReflect.isConstructorLike(obj)` instead.');
 		//!steal-remove-end
-		return obj && obj[canSymbol.for("getValue")];
+		return obj && canReflect.isFunctionLike(obj) && !canReflect.isConstructorLike(obj);
 	},
 
 	isCompute: function(obj){
