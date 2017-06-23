@@ -1,4 +1,8 @@
 var namespace = require('can-namespace');
+var canReflect = require('can-reflect');
+var canSymbol = require('can-symbol');
+var dev = require('can-util/js/dev/dev');
+
 /**
  * @module {Object} can-types
  * @parent can-infrastructure
@@ -11,100 +15,62 @@ var namespace = require('can-namespace');
  * `can-types` exports an object with placeholder functions that
  * can be used to provide default types or test if something is of a certain type.
  *
- * This is where the sausage of loose coupling modules takes place.
- * Modules that provide a type will overwrite one or multiple of these functions so
- * they take into account the new type.
- *
- * For example, `can-define/map/map` might overwrite `isMapLike` to return true
- * if the object is an instance of Map:
+ * For example, `can-define/map/map` might overwrite `DefeaultMap` to return DefineMap
  *
  * ```js
- * var types = require("can-types");
- * var oldIsMapLike = types.isMapLike;
- * types.isMapLike = function(obj){
- *   return obj instanceof DefineMap || oldIsMapLike.apply(this, arguments);
- * };
  * types.DefaultMap = DefineMap;
  * ```
  */
 
 var types = {
-	/**
-	 * @function can-types.isMapLike isMapLike
-	 * @signature `types.isMapLike(obj)`
-	 *   Returns true if `obj` is an observable key-value pair type object.
-	 *
-	 * @return {Boolean} `true` if the object is map like.
-	 */
-	isMapLike: function(){
-		return false;
+	isMapLike: function(obj){
+		//!steal-remove-start
+		dev.warn('can-types.isMapLike(obj) is deprecated, please use `canReflect.isObservableLike(obj) && canReflect.isMapLike(obj)` instead.');
+		//!steal-remove-end
+		return canReflect.isObservableLike(obj) && canReflect.isMapLike(obj);
 	},
-	/**
-	 * @function can-types.isListLike isListLike
-	 * @signature `types.isListLike(obj)`
-	 *   Returns true if `obj` is an observable list-type object with numeric keys and a length.
-	 *
-	 * @return {Boolean} `true` if the object is list like.
-	 */
-	isListLike: function(){
-		return false;
+
+	isListLike: function(obj){
+		//!steal-remove-start
+		dev.warn('can-types.isListLike(obj) is deprecated, please use `canReflect.isObservableLike(obj) && canReflect.isListLike(obj)` instead.');
+		//!steal-remove-end
+		return canReflect.isObservableLike(obj) && canReflect.isListLike(obj);
 	},
-	/**
-	 * @function can-types.isPromise isPromise
-	 * @signature `types.isPromise(obj)`
-	 *   Returns true if `obj` is a Promise.
-	 *
-	 * @return {Boolean} `true` if the object is a Promise.
-	 */
+
 	isPromise: function(obj){
-		return (obj instanceof Promise || (Object.prototype.toString.call(obj) === '[object Promise]'));
+		//!steal-remove-start
+		dev.warn('can-types.isPromise is deprecated, please use canReflect.isPromise instead.');
+		//!steal-remove-end
+		return canReflect.isPromise(obj);
 	},
-	/**
-	 * @function can-types.isConstructor isConstructor
-	 * @signature `types.isConstructor(obj)`
-	 *   Returns true if `obj` looks like a constructor function to be called with `new`.
-	 *
-	 * @return {Boolean} `true` if the object is a constructor function.
-	 */
+
 	isConstructor: function(func){
-		/* jshint unused: false */
-		if(typeof func !== "function") {
-			return false;
-		}
-		// if there are any properties on the prototype, assume it's a constructor
-		for(var prop  in func.prototype) {
-			return true;
-		}
-		// We could also check if something is returned, if it is, probably not a constructor.
-		return false;
+		//!steal-remove-start
+		dev.warn('can-types.isConstructor is deprecated, please use canReflect.isConstructorLike instead.');
+		//!steal-remove-end
+		return canReflect.isConstructorLike(func);
 	},
-	/**
-	 * @function can-types.isCallableForValue isCallableForValue
-	 * @signature `types.isConstructor(obj)`
-	 *   Returns true if `obj` looks like a function that should be read to get a value.
-	 *
-	 * @return {Boolean} `true` if the object should be called for a value.
-	 */
+
 	isCallableForValue: function(obj){
-		return typeof obj === "function" && !types.isConstructor(obj);
+		//!steal-remove-start
+		dev.warn('can-types.isCallableForValue(obj) is deprecated, please use `canReflect.isFunctionLike(obj) && !canReflect.isConstructorLike(obj)` instead.');
+		//!steal-remove-end
+		return obj && canReflect.isFunctionLike(obj) && !canReflect.isConstructorLike(obj);
 	},
-	/**
-	 * @function can-types.isCompute isCompute
-	 * @signature `types.isCompute(obj)`
-	 *   Returns true if `obj` is a [can-compute].
-	 *
-	 * @return {Boolean} `true` if the object is a [can-compute].
-	 */
+
 	isCompute: function(obj){
+		//!steal-remove-start
+		dev.warn('can-types.isCompute is deprecated.');
+		//!steal-remove-end
 		return obj && obj.isComputed;
 	},
-	/**
-	 * @property {Symbol} can-types.iterator iterator
-	 * @option {Symbol}
-	 *
-	 * Used to implement an iterable object that can be used with [can-util/js/each/each]. In browsers that support for/of this will be Symbol.iterator; in older browsers it will be a string, but is still useful with [can-util/js/each/each].
-	 */
-	iterator: (typeof Symbol === "function" && Symbol.iterator) || "@@iterator",
+
+	get iterator() {
+		//!steal-remove-start
+		dev.warn('can-types.iterator is deprecated, use `canSymbol.iterator || canSymbol.for("iterator")` instead.');
+		//!steal-remove-end
+		return canSymbol.iterator || canSymbol.for("iterator");
+	},
 	/**
 	 * @property {Map} can-types.DefaultMap DefaultMap
 	 *
@@ -124,14 +90,6 @@ var types = {
 	 */
 	DefaultList: null,
 	/**
-	 * @function can-types.wrapElement wrapElement
-	 * @signature `types.wrapElement(element)`
-	 *   Wraps an element into an object useful by DOM libraries ala jQuery.
-	 *
-	 *   @param {Node} element Any object inheriting from the [Node interface](https://developer.mozilla.org/en-US/docs/Web/API/Node).
-	 *   @return {{}} A wrapped object.
-	 */
-	/**
 	 * @function can-types.queueTask queueTask
 	 * @signature `types.queueTask(task)`
 	 *   Run code that will be queued at the end of the current batch.
@@ -141,6 +99,14 @@ var types = {
 		var args = task[2] || [];
 		task[0].apply(task[1], args);
 	},
+	/**
+	 * @function can-types.wrapElement wrapElement
+	 * @signature `types.wrapElement(element)`
+	 *   Wraps an element into an object useful by DOM libraries ala jQuery.
+	 *
+	 *   @param {Node} element Any object inheriting from the [Node interface](https://developer.mozilla.org/en-US/docs/Web/API/Node).
+	 *   @return {{}} A wrapped object.
+	 */
 	wrapElement: function(element){
 		return element;
 	},
