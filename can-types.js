@@ -6,6 +6,7 @@ var dev = require('can-util/js/dev/dev');
 /**
  * @module {Object} can-types
  * @parent can-infrastructure
+ * @package ./package.json
  * @description A stateful container for CanJS type information.
  *
  * @body
