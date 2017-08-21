@@ -6,15 +6,6 @@ var clone = require('steal-clone');
 
 QUnit.module('can-types');
 
-QUnit.test('types.isConstructor', function () {
-	var Constructor = function(){};
-	Constructor.prototype.method = function(){};
-
-	ok(types.isConstructor(Constructor));
-	ok(!types.isConstructor(Constructor.prototype.method));
-
-});
-
 // Only run this in an environment with a document
 if(DOCUMENT()) {
 

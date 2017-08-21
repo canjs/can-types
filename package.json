@@ -33,15 +33,13 @@
   ],
   "dependencies": {
     "can-namespace": "1.0.0",
-    "can-reflect": "^1.0.0",
-    "can-symbol": "^1.0.0",
     "can-util": "^3.9.0"
   },
   "devDependencies": {
     "jshint": "^2.9.1",
-    "steal": "^1.2.10",
+    "steal": "^1.5.8",
     "steal-qunit": "^1.0.1",
-    "steal-tools": "^1.1.2",
+    "steal-tools": "^1.8.2",
     "testee": "^0.7.0"
   }
 }
