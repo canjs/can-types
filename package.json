@@ -34,7 +34,7 @@
   "dependencies": {
     "can-namespace": "1.0.0",
     "can-reflect": "^1.0.0",
-    "can-symbol": "^1.0.0",
+    "can-symbol": "^2.0.0",
     "can-util": "^3.9.0"
   },
   "devDependencies": {
