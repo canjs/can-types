@@ -1,7 +1,7 @@
 var namespace = require('can-namespace');
 var canReflect = require('can-reflect');
 var canSymbol = require('can-symbol');
-var dev = require('can-util/js/dev/dev');
+var dev = require('can-log/dev/dev');
 
 /**
  * @module {Object} can-types
