@@ -1,6 +1,6 @@
 var QUnit = require('steal-qunit');
 var types = require('can-types');
-var DOCUMENT = require('can-util/dom/document/document');
+var DOCUMENT = require('can-globals/document/document');
 var namespace = require('can-namespace');
 var clone = require('steal-clone');
 
