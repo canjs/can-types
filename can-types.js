@@ -5,7 +5,8 @@ var dev = require('can-log/dev/dev');
 
 /**
  * @module {Object} can-types
- * @parent can-infrastructure
+ * @parent can-typed-data
+ * @collection can-infrastructure
  * @package ./package.json
  * @description A stateful container for CanJS type information.
  *
