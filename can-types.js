@@ -27,49 +27,63 @@ var dev = require('can-log/dev/dev');
 var types = {
 	isMapLike: function(obj){
 		//!steal-remove-start
-		dev.warn('can-types.isMapLike(obj) is deprecated, please use `canReflect.isObservableLike(obj) && canReflect.isMapLike(obj)` instead.');
+		if (process.env.NODE_ENV !== 'production') {
+			dev.warn('can-types.isMapLike(obj) is deprecated, please use `canReflect.isObservableLike(obj) && canReflect.isMapLike(obj)` instead.');
+		}
 		//!steal-remove-end
 		return canReflect.isObservableLike(obj) && canReflect.isMapLike(obj);
 	},
 
 	isListLike: function(obj){
 		//!steal-remove-start
-		dev.warn('can-types.isListLike(obj) is deprecated, please use `canReflect.isObservableLike(obj) && canReflect.isListLike(obj)` instead.');
+		if (process.env.NODE_ENV !== 'production') {
+			dev.warn('can-types.isListLike(obj) is deprecated, please use `canReflect.isObservableLike(obj) && canReflect.isListLike(obj)` instead.');
+		}
 		//!steal-remove-end
 		return canReflect.isObservableLike(obj) && canReflect.isListLike(obj);
 	},
 
 	isPromise: function(obj){
 		//!steal-remove-start
-		dev.warn('can-types.isPromise is deprecated, please use canReflect.isPromise instead.');
+		if (process.env.NODE_ENV !== 'production') {
+			dev.warn('can-types.isPromise is deprecated, please use canReflect.isPromise instead.');
+		}
 		//!steal-remove-end
 		return canReflect.isPromise(obj);
 	},
 
 	isConstructor: function(func){
 		//!steal-remove-start
-		dev.warn('can-types.isConstructor is deprecated, please use canReflect.isConstructorLike instead.');
+		if (process.env.NODE_ENV !== 'production') {
+			dev.warn('can-types.isConstructor is deprecated, please use canReflect.isConstructorLike instead.');
+		}
 		//!steal-remove-end
 		return canReflect.isConstructorLike(func);
 	},
 
 	isCallableForValue: function(obj){
 		//!steal-remove-start
-		dev.warn('can-types.isCallableForValue(obj) is deprecated, please use `canReflect.isFunctionLike(obj) && !canReflect.isConstructorLike(obj)` instead.');
+		if (process.env.NODE_ENV !== 'production') {
+			dev.warn('can-types.isCallableForValue(obj) is deprecated, please use `canReflect.isFunctionLike(obj) && !canReflect.isConstructorLike(obj)` instead.');
+		}
 		//!steal-remove-end
 		return obj && canReflect.isFunctionLike(obj) && !canReflect.isConstructorLike(obj);
 	},
 
 	isCompute: function(obj){
 		//!steal-remove-start
-		dev.warn('can-types.isCompute is deprecated.');
+		if (process.env.NODE_ENV !== 'production') {
+			dev.warn('can-types.isCompute is deprecated.');
+		}
 		//!steal-remove-end
 		return obj && obj.isComputed;
 	},
 
 	get iterator() {
 		//!steal-remove-start
-		dev.warn('can-types.iterator is deprecated, use `canSymbol.iterator || canSymbol.for("iterator")` instead.');
+		if (process.env.NODE_ENV !== 'production') {
+			dev.warn('can-types.iterator is deprecated, use `canSymbol.iterator || canSymbol.for("iterator")` instead.');
+		}
 		//!steal-remove-end
 		return canSymbol.iterator || canSymbol.for("iterator");
 	},
