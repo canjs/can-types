@@ -1,3 +1,4 @@
+"use strict";
 var namespace = require('can-namespace');
 var canReflect = require('can-reflect');
 var canSymbol = require('can-symbol');
