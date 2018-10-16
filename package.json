@@ -36,7 +36,7 @@
     "can-globals": "<2.0.0",
     "can-log": "^1.0.0",
     "can-namespace": "1.0.0",
-    "can-reflect": "^1.0.0",
+    "can-reflect": "^1.17.6",
     "can-symbol": "^1.0.0"
   },
   "devDependencies": {
