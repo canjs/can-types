@@ -6,38 +6,38 @@ var clone = require('steal-clone');
 
 QUnit.module('can-types');
 
-QUnit.test('types.isConstructor', function () {
+QUnit.test('types.isConstructor', function(assert) {
 	var Constructor = function(){};
 	Constructor.prototype.method = function(){};
 
-	ok(types.isConstructor(Constructor));
-	ok(!types.isConstructor(Constructor.prototype.method));
+	assert.ok(types.isConstructor(Constructor));
+	assert.ok(!types.isConstructor(Constructor.prototype.method));
 
 });
 
 // Only run this in an environment with a document
 if(DOCUMENT()) {
 
-	QUnit.test('types.wrapElement', function() {
+	QUnit.test('types.wrapElement', function(assert) {
 		var el = DOCUMENT().createElement('div');
 
-		equal(el, types.wrapElement(el), 'is an identity function by default');
+		assert.equal(el, types.wrapElement(el), 'is an identity function by default');
 	});
 
-	QUnit.test('types.unwrapElement', function() {
+	QUnit.test('types.unwrapElement', function(assert) {
 		var el = DOCUMENT().createElement('div');
 
-		equal(el, types.unwrapElement(el), 'is an identity function by default');
+		assert.equal(el, types.unwrapElement(el), 'is an identity function by default');
 	});
 
 }
 
-QUnit.test('sets can-namespace.types', function() {
-	equal(namespace.types, types);
+QUnit.test('sets can-namespace.types', function(assert) {
+	assert.equal(namespace.types, types);
 });
 
-QUnit.test('should throw if can-namespace.types is already defined', function() {
-	stop();
+QUnit.test('should throw if can-namespace.types is already defined', function(assert) {
+	var done = assert.async();
 	clone({
 		'can-namespace': {
 			default: {
@@ -48,12 +48,12 @@ QUnit.test('should throw if can-namespace.types is already defined', function() 
 	})
 	.import('./can-types')
 	.then(function() {
-		ok(false, 'should throw');
-		start();
+		assert.ok(false, 'should throw');
+		done();
 	})
 	.catch(function(err) {
 		var errMsg = err && err.message || err;
-		ok(errMsg.indexOf('can-types') >= 0, 'should throw an error about can-types');
-		start();
+		assert.ok(errMsg.indexOf('can-types') >= 0, 'should throw an error about can-types');
+		done();
 	});
 });
